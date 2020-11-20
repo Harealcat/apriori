@@ -173,11 +173,9 @@ def frequent_pairs(f_singletons, support, filename, support_map):
 
     # singletons as list
     singletons = list(hash_map)
-    # remove first element, always 0
-    triangular_matrix = triangular_matrix[1:]
 
     # get the pair values and add them to set, as for the support map
-    i, j = 1, 2
+    i, j = 1, 1
     for count in triangular_matrix:
         if count > support:
             item1 = singletons[i - 1]
@@ -230,7 +228,7 @@ def construct_k_plus_one(frequent_sets):
 
                 # if all subsets are in frequent set, we can add it to ck
                 if is_valid:
-                    new_tuple = tuple(new_set)
+                    new_tuple = tuple(sorted(new_set))
                     ck.add(new_tuple)
     return ck
 
@@ -283,7 +281,7 @@ def find_rules(frequent_sets, support_map, threshold):
     n = len(frequent_sets)
 
     # 3 nested loops to create all possible rules
-    # for each i+1_tuples i>=1
+    # for each (i+1)_tuples i>=1
     for i in range(1, n):
         x = frequent_sets[i]
         # for each tuple in i+1_tuples
